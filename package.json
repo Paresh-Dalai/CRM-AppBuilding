@@ -1,0 +1,26 @@
+{
+  "name": "crm-appbuilding",
+  "version": "1.0.0",
+  "description": "complete crm app building",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest --testEnvironment=node --runInBand --detectOpenHandles --coverage ./test",
+    "devStart": "nodemon server.js"
+  },
+  "keywords": [
+    "crm-app"
+  ],
+  "author": "Paresh",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "jest": "^29.5.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb-memory-server": "^8.12.2",
+    "mongoose": "^7.1.1",
+    "node-rest-client": "^3.1.1",
+    "nodemon": "^2.0.22"
+  }
+}
