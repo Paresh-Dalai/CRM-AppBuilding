@@ -12,9 +12,9 @@ const Signup = async (req,res) => {
     let userStatus = req.body.userStatus
 
     if(userType == Constants.userTypes.admin) {
-             userStatus = Constants.userStatus.approved
-    } else {
         userStatus = Constants.userStatus.approved
+    } else {
+        userStatus = Constants.userStatus.pending
     }
 
     try {
