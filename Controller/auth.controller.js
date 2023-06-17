@@ -14,7 +14,7 @@ const Signup = async (req,res) => {
     if(userType == Constants.userTypes.admin) {
         userStatus = Constants.userStatus.approved
     } else {
-        userStatus = Constants.userStatus.pending
+        userStatus = Constants.userStatus.approved
     }
 
     try {
