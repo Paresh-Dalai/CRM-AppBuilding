@@ -10,7 +10,7 @@ const UserController = require("./../Controller/User.controller")
    app.post("/crm/api/v1/auth/signin", authController.SignIn)
    app.get("/crm/api/v1/users"  , UserController.getAllUsers)
    app.get("/crm/api/v1/users/:userId" , [AuthMiddlewares.verifyToken , AuthMiddlewares.isAdmin] , UserController.getUserById)
-   app.put("/crm/api/v1/users/:userId" , [AuthMiddlewares.verifyToken , AuthMiddlewares.isAdmin] ,UserController.updateUserDetails)
+   app.put("/crm/api/v1/users/:userId" , [AuthMiddlewares.verifyToken , AuthMiddlewares.isAdmin] , UserController.updateUserDetails)
 }
 
 

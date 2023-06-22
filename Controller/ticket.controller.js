@@ -90,32 +90,51 @@ const updateTicket = async (req,res) => {
 
 const getAllTickets = async (req,res) => {
 
-    try {
+    // try {
       
-        const getTickets = await Tickets.find()
-        const ourUsers = await Users.findOne({userId : req.userId})
+    //     const getTickets = await Tickets.find()
+    //     const ourUsers = await Users.findOne({userId : req.userId})
 
-        if(getTickets && ourUsers.userType == Constants.userTypes.engineer || ourUsers.userType == Constants.userTypes.admin) {
-            let allTickets = [];
-            getTickets.forEach((ticket) => {
-                allTickets.push(
-                    {
-                        id : ticket.id,
-                        title : ticket.title,
-                        description : ticket.description,
-                        reporter : ticket.reporter,
-                        ticketPriority : ticket.ticketPriority,
-                        status : ticket.status
-                    }
-                )
-            })
-            res.send(allTickets).status(200)
+    //     if(getTickets && ourUsers.userType == Constants.userTypes.engineer || ourUsers.userType == Constants.userTypes.admin) {
+    //         let allTickets = [];
+    //         getTickets.forEach((ticket) => {
+    //             allTickets.push(
+    //                 {
+    //                     id : ticket.id,
+    //                     title : ticket.title,
+    //                     description : ticket.description,
+    //                     reporter : ticket.reporter,
+    //                     ticketPriority : ticket.ticketPriority,
+    //                     status : ticket.status
+    //                 }
+    //             )
+    //         })
+    //         res.send(allTickets).status(200)
+    //     }
+    // } catch(error) {
+    //       res.send("Error occured when fetch with Tickets").status(500)
+    // }
+   
+  
+        try {
+          let user = await Users.findOne({ userId: req.userId });
+          let tickets;
+      
+          if (user.userType === Constants.userTypes.customer)
+            tickets = await Tickets.find({ _id: { $in: user.ticketsCreated } });
+          else if (user.userType === Constants.userTypes.engineer)
+            tickets = await Tickets.find({ _id: { $in: user.ticketsAssigned } });
+          else if (user.userType === Constants.userTypes.admin)
+            tickets = await Tickets.find({});
+          else return res.status(200).send("Your User Type is Not Correct");
+      
+          if (tickets.length) return res.status(200).send(tickets);
+          else return res.status(200).send("No tickets found");
+        } catch (err) {
+          return res.status(500).send("internal Err");
         }
-    } catch(error) {
-          res.send("Error occured when fetch with Tickets").status(500)
-    }
+      };
 
-}
 
 const getTicketsByIdByEngineerOrCustomer = async (req,res) => {
     
