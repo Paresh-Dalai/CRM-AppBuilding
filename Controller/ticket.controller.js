@@ -99,7 +99,7 @@ const getAllTicketsInDb = async (req,res) => {
             getTickets.forEach((ticket) => {
                 allTickets.push(
                     {
-                        id : ticket.id,
+                        id : ticket._id,
                         title : ticket.title,
                         description : ticket.description,
                         reporter : ticket.reporter,
