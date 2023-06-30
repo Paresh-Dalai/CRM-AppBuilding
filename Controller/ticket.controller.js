@@ -87,34 +87,40 @@ const updateTicket = async (req,res) => {
 
 }
 
+const getAllTicketsInDb = async (req,res) => {
+   
+    try {
+      
+        const getTickets = await Tickets.find()
+        const ourUsers = await Users.findOne({userId : req.userId})
+
+        if(getTickets && ourUsers.userType == Constants.userTypes.engineer || ourUsers.userType == Constants.userTypes.admin) {
+            let allTickets = [];
+            getTickets.forEach((ticket) => {
+                allTickets.push(
+                    {
+                        id : ticket.id,
+                        title : ticket.title,
+                        description : ticket.description,
+                        reporter : ticket.reporter,
+                        ticketPriority : ticket.ticketPriority,
+                        status : ticket.status
+                    }
+                )
+            })
+            res.send(allTickets).status(200)
+        }
+    } catch(error) {
+          res.send("Error occured when fetch with Tickets").status(500)
+    }
+   
+
+}
+
 
 const getAllTickets = async (req,res) => {
 
-    // try {
-      
-    //     const getTickets = await Tickets.find()
-    //     const ourUsers = await Users.findOne({userId : req.userId})
-
-    //     if(getTickets && ourUsers.userType == Constants.userTypes.engineer || ourUsers.userType == Constants.userTypes.admin) {
-    //         let allTickets = [];
-    //         getTickets.forEach((ticket) => {
-    //             allTickets.push(
-    //                 {
-    //                     id : ticket.id,
-    //                     title : ticket.title,
-    //                     description : ticket.description,
-    //                     reporter : ticket.reporter,
-    //                     ticketPriority : ticket.ticketPriority,
-    //                     status : ticket.status
-    //                 }
-    //             )
-    //         })
-    //         res.send(allTickets).status(200)
-    //     }
-    // } catch(error) {
-    //       res.send("Error occured when fetch with Tickets").status(500)
-    // }
-   
+    
   
         try {
           let user = await Users.findOne({ userId: req.userId });
@@ -201,4 +207,4 @@ const getTicketsById = async (req,res) => {
     
 }
 
-module.exports = {createTicket,updateTicket,getAllTickets,getTicketsById,getTicketsByIdByEngineerOrCustomer}
+module.exports = {createTicket,updateTicket,getAllTickets, getAllTicketsInDb ,getTicketsById,getTicketsByIdByEngineerOrCustomer}
