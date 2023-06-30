@@ -92,7 +92,7 @@ const getAllTicketsInDb = async (req,res) => {
     try {
       
         const getTickets = await Tickets.find()
-        const ourUsers = await Users.findOne({userId : req.userId})
+        // const ourUsers = await Users.findOne({userId : req.userId})
 
         if(getTickets && ourUsers.userType == Constants.userTypes.engineer || ourUsers.userType == Constants.userTypes.admin) {
             let allTickets = [];
@@ -104,7 +104,8 @@ const getAllTicketsInDb = async (req,res) => {
                         description : ticket.description,
                         reporter : ticket.reporter,
                         ticketPriority : ticket.ticketPriority,
-                        status : ticket.status
+                        status : ticket.status,
+                        assignee : ticket.assignee
                     }
                 )
             })
