@@ -47,7 +47,8 @@ const createTicket = async (req,res) => {
                 ticket._id,
                 `ticket with ${ticket._id} updated and is in status ${ticket.status}`,
                 ticket.description,
-                ['Pareshdalai143@gmail.com'],
+               [user.email, engineer.email],
+               ['Pareshdalai143@gmail.com'],
                 ticket.reporter
             )
 
