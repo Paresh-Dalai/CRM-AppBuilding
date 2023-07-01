@@ -19,7 +19,10 @@ module.exports = (ticketId, subject, content, emailIds, requester) => {
         headers: {"Content-Type": "application/json"}
     }
 
-    client.post("http://localhost:2525/ticketNotificationService/api/v1/notification", args, function (data, response){
+    // client.post("http://localhost:2525/ticketNotificationService/api/v1/notification", args, function (data, response){
+    //     console.log(data)
+
+    client.post("https://notification-service-1ggi.onrender.com/ticketNotificationService/api/v1/notification", args, function (data, response){
         console.log(data)
         
     })
