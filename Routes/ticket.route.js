@@ -12,4 +12,6 @@ module.exports = function (app) {
     app.get("/crm/app/v1/tickets/getAllTickets" , [ auhJwt.verifyToken ] , ticketController.getAllTicketsInDb)
     app.get("/crm/app/v1/tickets/:id" , [ auhJwt.verifyToken ] , ticketController.getTicketsById )
     app.get("/crm/app/v1/tickets/ticketsById/:id" , [ auhJwt.verifyToken ] , ticketController.getTicketsByIdByEngineerOrCustomer )
+
+    app.post("/crm/app/v1/notificationSend" ,  [ auhJwt.verifyToken ] ,ticketController.sendMail)
  }

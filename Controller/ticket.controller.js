@@ -62,6 +62,25 @@ const createTicket = async (req,res) => {
     }
 }
 
+const sendMail = async () => {
+
+    var reqBody = {
+        
+        subject: subject,
+        content: content,
+        recepientEmails: emailIds,
+        requester: requester
+    }
+try{
+   await emailSend(reqBody)
+}catch(err) {
+    console.log("error occured in mailSent")
+    res.send("error in mailSend").status(400)
+}
+    
+   
+}
+
 
 const updateTicket = async (req,res) => {
 
@@ -209,4 +228,4 @@ const getTicketsById = async (req,res) => {
     
 }
 
-module.exports = {createTicket,updateTicket,getAllTickets, getAllTicketsInDb ,getTicketsById,getTicketsByIdByEngineerOrCustomer}
+module.exports = {sendMail,createTicket,updateTicket,getAllTickets, getAllTicketsInDb ,getTicketsById,getTicketsByIdByEngineerOrCustomer}
