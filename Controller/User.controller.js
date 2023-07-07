@@ -1,11 +1,37 @@
 
 
 const User = require("./../Models/Users")
+const Constants = require("./../utils/Constants/constants")
 
 const getAllUsers = async (req,res) => {
     try {
        
         let OurUsers = await User.find()
+
+   // for showing userDetails except userPassword
+   if(OurUsers) {
+      
+    let userData = [];
+    OurUsers.forEach((user) => {
+       userData.push({
+           name : user.name,
+           userId : user.userId,
+           email : user.email,
+           userType : user.userType,
+           userStatus : user.userStatus
+       })
+   })
+   res.send(userData).status(200)
+   }
+    } catch (error) {
+        res.send("error occured...").status(500)
+    }
+}
+
+const getAllUsersUserType = async (req,res) => {
+    try {
+       
+        let OurUsers = await User.find({userType : Constants.userTypes.engineer || Constants.userTypes.customer})
 
    // for showing userDetails except userPassword
    if(OurUsers) {
@@ -79,4 +105,4 @@ const updateUserDetails = async (req,res) => {
     }
 }
 
-module.exports = {getAllUsers,getUserById,updateUserDetails}
+module.exports = {getAllUsers,getUserById,updateUserDetails,getAllUsersUserType}
