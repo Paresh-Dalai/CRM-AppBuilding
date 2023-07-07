@@ -30,7 +30,7 @@ const getAllUsers = async (req,res) => {
 
 const getAllUsersUserType = async (req,res) => {
       
-    let enteredUserType = req.params.userType;
+    let enteredUserType = req.params.UserType;
     let OurUsers;
     try {
        
