@@ -35,9 +35,9 @@ const getAllUsersUserType = async (req,res) => {
     try {
        
         // let OurUsers = await User.find({userType : Constants.userTypes.engineer || Constants.userTypes.customer})
-     if(enteredUserType == Constants.userTypes.customer) {
+     if(enteredUserType == CUSTOMER) {
          OurUsers = await User.find({userType : "CUSTOMER"})
-     }else if(enteredUserType == Constants.userTypes.engineer){
+     }else if(enteredUserType == ENGINEER){
          OurUsers = await User.find({userType : "ENGINEER"})
      }
         
