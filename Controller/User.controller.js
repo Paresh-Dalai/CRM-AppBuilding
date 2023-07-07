@@ -29,9 +29,14 @@ const getAllUsers = async (req,res) => {
 }
 
 const getAllUsersUserType = async (req,res) => {
+      
+    let enteredUserType = req.params.userType;
+
     try {
        
-        let OurUsers = await User.find({userType : Constants.userTypes.engineer || Constants.userTypes.customer})
+        // let OurUsers = await User.find({userType : Constants.userTypes.engineer || Constants.userTypes.customer})
+
+        let OurUsers = await User.find({userType : enteredUserType})
 
    // for showing userDetails except userPassword
    if(OurUsers) {
