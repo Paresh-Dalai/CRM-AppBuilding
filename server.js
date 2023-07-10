@@ -32,6 +32,8 @@ require("./Routes/auth.route") (expressApp)
 
 require("./Routes/ticket.route") (expressApp)
 
+require("./Routes/leads.route") (expressApp)
+
 expressApp.listen(portNo.PORT, () => {
     console.log('srver is running on port no. --' + portNo.PORT)
 })

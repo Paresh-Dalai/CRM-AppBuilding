@@ -1,7 +1,8 @@
 
 
 
-const UserModel = require("./../Models/Users")
+const UserModel = require("./../Models/Users");
+
 const Constants = require('./../utils/Constants/constants')
 
 const verifySignUp = async (req,res,next) => {
@@ -43,7 +44,8 @@ const verifySignUp = async (req,res,next) => {
     const ouruserTypes = [
         Constants.userTypes.admin,
         Constants.userTypes.customer,
-        Constants.userTypes.engineer
+        Constants.userTypes.engineer,
+        Constants.userTypes.sales_rep
     ]
 
     if(userType && !ouruserTypes.includes(userType)) {
